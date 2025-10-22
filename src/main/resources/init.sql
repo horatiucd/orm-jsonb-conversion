@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS articles;
+CREATE TABLE IF NOT EXISTS articles (
+    id SERIAL PRIMARY KEY,
+    code VARCHAR NOT NULL UNIQUE,
+    attributes JSONB NOT NULL
+);
+

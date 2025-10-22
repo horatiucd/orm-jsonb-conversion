@@ -2,50 +2,30 @@ package com.hcd.ormjsonbconversion.model;
 
 import com.asentinel.common.orm.mappers.Column;
 import com.asentinel.common.orm.mappers.PkColumn;
+import com.asentinel.common.orm.mappers.SqlParam;
 import com.asentinel.common.orm.mappers.Table;
 
 import java.time.LocalDate;
 
-@Table("Invoices")
-public class Invoice {
-
-    public static final String COL_NUMBER = "number";
+@Table("Articles")
+public class Article {
 
     @PkColumn("id")
     private int id;
 
-    @Column(value = COL_NUMBER)
-    private String number;
+    @Column("code")
+    private String code;
 
-    @Column("date")
-    private LocalDate date;
+    @Column(value = "attributes", sqlParam = @SqlParam("jsonb"))
+    private Attributes attributes;
 
-    @Column("vendor")
-    private Vendor vendor;
+    protected Article() {
 
-    @Column("service")
-    private Service service;
-
-    @Column("status")
-    private Status status;
-
-    @Column("amount")
-    private double amount;
-
-    public enum Vendor {
-        VODAFONE, ORANGE
     }
 
-    public enum Service {
-        VOIP, INTERNET
-    }
-
-    public enum Status {
-        REVIEWED, APPROVED, PAID
-    }
-
-    protected Invoice() {
-
+    public Article(String code, Attributes attributes) {
+        this.code = code;
+        this.attributes = attributes;
     }
 
     public int getId() {
@@ -56,51 +36,19 @@ public class Invoice {
         this.id = id;
     }
 
-    public String getNumber() {
-        return number;
+    public String getCode() {
+        return code;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public Attributes getAttributes() {
+        return attributes;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public Vendor getVendor() {
-        return vendor;
-    }
-
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
-    }
-
-    public Service getService() {
-        return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setAttributes(Attributes attributes) {
+        this.attributes = attributes;
     }
 }
